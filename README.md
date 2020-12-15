@@ -48,37 +48,4 @@ Copycopy code to clipboard
 gatsby develop
 You can now visit the page running in your browser at http://localhost:8000. Hello Gatsby! 👋
 
-Porting index.html
-Here is /index.html from the example site structure above:
-
-/website-domain/who/index.html
-Copy/website-domain/who/index.html: copy code to clipboard
-<html lang="en">
-  <head>
-    <title>Taylor's Tidy Trees</title>
-    <link href="/assets/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-  </head>
-  <body>
-    <header>
-      <a href="/" class="brand-color logo-text">Taylor's Tidy Trees</a>
-      <nav>
-        <ul>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/services/index.html">Services</a></li>
-          <li><a href="/who/index.html">Who We Are</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <h1>Welcome To Taylor's Tidy Trees</h1>
-      <h2>We care about trees of all kinds!</h2>
-    </main>
-  </body>
-</html>
-In the following sections, you’ll convert this block of HTML into its equivalent code in Gatsby.
-
-Continue the steps as in https://www.gatsbyjs.com/docs/porting-an-html-site-to-gatsby/
-
+For porting html to gatsby site, continue the steps as in https://www.gatsbyjs.com/docs/porting-an-html-site-to-gatsby/
