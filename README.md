@@ -5,95 +5,80 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsby's hello-world starter
+  Porting an HTML Site to Gatsby
 </h1>
 
-Kick off your project with this hello-world boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+<h2> referred the step by step guide in this <a href="https://www.gatsbyjs.com/docs/porting-an-html-site-to-gatsby/"> gatsby docs </a> of gatsby and this page contains most of the steps from the same page. </h2>
+This guide focuses on the parts of Gatsby that are applicable to a static website. For a more comprehensive walk through Gatsby’s features check out the Gatsby tutorial. By following the example on this page, you will complete the key stages of porting an HTML website to Gatsby and establish your Gatsby development workflow.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+Note: This guide can also be used to migrate a section of a site, to be served next to existing files. Pay extra attention to the section on hosting for guidance.
 
-## 🚀 Quick start
+Getting Started
+Here is the structure of an example static HTML/CSS website that this guide will walk through porting:
 
-1.  **Create a Gatsby site.**
 
-    Use the Gatsby CLI to create a new site, specifying the hello-world starter.
+Assumptions
+The example site uses global CSS files (style.css and normalize.css); styling structures like Sass architectures or CSS-in-JS can be accommodated but will not be covered here.
 
-    ```shell
-    # create a new Gatsby site using the hello-world starter
-    gatsby new my-hello-world-starter https://github.com/gatsbyjs/gatsby-starter-hello-world
-    ```
+No client-side JavaScript (e.g jQuery etc.) is on the example site. If your site includes client-side JavaScript libraries and functionality, Gatsby may conflict with it at build time if not handled or removed when porting. Learn more about Debugging HTML Builds.
 
-1.  **Start developing.**
+Development environment
+Gatsby generates websites and web applications for production through a compilation and build process, and it also has tools optimized for local development. To set up the Gatsby CLI and development environment (if you haven’t already) check out Part Zero of the Gatsby tutorial.
 
-    Navigate into your new site’s directory and start it up.
+Gatsby Project
+Now that you are set up, you can use the Gatsby and npm CLI tools in your terminal to get this site ported! Make a new project using the Gatsby hello world starter with the following command:
 
-    ```shell
-    cd my-hello-world-starter/
-    gatsby develop
-    ```
+Copy code to clipboard
+gatsby new gatsby-site https://github.com/gatsbyjs/gatsby-starter-hello-world
+You should now have a folder called gatsby-site containing a basic Gatsby application. Open the new folder in your code editor and cd (change directory) into the folder in your terminal to continue:
 
-1.  **Open the source code and start editing!**
+Copy code to clipboard
+cd gatsby-site
+The /src folder contains most of the front-end code for the Gatsby site. In the Gatsby build process, every component file in the /src/pages folder will automatically create an HTML page. In your new Gatsby application, the only page created is from the index page component in /src/pages/index.js:
 
-    Your site is now running at `http://localhost:8000`!
+/gatsby-site/src/pages/index.js
+Copy/gatsby-site/src/pages/index.js: copy code to clipboard
+import React from "react"
+export default function Home() {
+  return <div>Hello world!</div>
+}
+Run the development server with gatsby develop in the command line to see the website in your browser.
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
+Copycopy code to clipboard
+gatsby develop
+You can now visit the page running in your browser at http://localhost:8000. Hello Gatsby! 👋
 
-    Open the `my-hello-world-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+Porting index.html
+Here is /index.html from the example site structure above:
 
-## 🧐 What's inside?
+/website-domain/who/index.html
+Copy/website-domain/who/index.html: copy code to clipboard
+<html lang="en">
+  <head>
+    <title>Taylor's Tidy Trees</title>
+    <link href="/assets/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="brand-color logo-text">Taylor's Tidy Trees</a>
+      <nav>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/services/index.html">Services</a></li>
+          <li><a href="/who/index.html">Who We Are</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Welcome To Taylor's Tidy Trees</h1>
+      <h2>We care about trees of all kinds!</h2>
+    </main>
+  </body>
+</html>
+In the following sections, you’ll convert this block of HTML into its equivalent code in Gatsby.
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+Continue the steps as in https://www.gatsbyjs.com/docs/porting-an-html-site-to-gatsby/
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
-
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
-
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
-
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
-
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
-
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/gatsby-config/) for more detail).
-
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-9.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
-
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
-
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-hello-world)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-hello-world)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
